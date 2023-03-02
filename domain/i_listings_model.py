@@ -1,5 +1,5 @@
-import json
 from abc import ABC, abstractmethod
+import numpy
 
 
 class IListingsModel(ABC):
@@ -17,8 +17,12 @@ class IListingsModel(ABC):
         self.long = long
 
     @abstractmethod
-    def price_to_json(self):
+    def price_to_json(self) -> dict[str, float]:
         return {'data': self.price if self.price is not None else 0}
+
+    @abstractmethod
+    def to_array(self) -> numpy.array:
+        pass
 
     def __repr__(self):
         additional_info_rep: str = self.model_name if self.model_name is not None else "Listing"

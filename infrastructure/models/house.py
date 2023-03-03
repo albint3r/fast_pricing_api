@@ -12,8 +12,8 @@ class House(IListingsModel):
         self.model_name = 'House'
         self.additional_information_class = f"m2_land: {self.m2_land}, "
 
-    def price_to_json(self) -> dict[str, float]:
-        return super().price_to_json()
+    def to_json(self) -> dict[str, any]:
+        return super().to_json()
 
     def to_array(self) -> np.array:
         return np.array([[self.m2_land, self.m2_const, self.rooms, self.baths, self.cars, self.lat, self.long]])

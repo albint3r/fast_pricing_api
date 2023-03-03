@@ -3,8 +3,19 @@ import numpy
 
 
 class IListingsModel(ABC):
+    """ Interface for a listings model."""
 
     def __init__(self, m2_const: float, rooms: int, baths: int, cars: int, lat: float, long: float):
+        """ Initializes a new instance of the IListingsModel class.
+
+        Parameters:
+            m2_const (float): The price constant.
+            rooms (int): The number of rooms.
+            baths (int): The number of bathrooms.
+            cars (int): The number of parking spaces.
+            lat (float): The latitude of the listing.
+            long (float): The longitude of the listing. """
+
         self.model_name: str | None = None
         self.additional_information_class: str | None = None
         self.price: float | None = None
@@ -17,11 +28,21 @@ class IListingsModel(ABC):
         self.long = long
 
     @abstractmethod
-    def price_to_json(self) -> dict[str, float]:
-        return {'data': self.price if self.price is not None else 0}
+    def to_json(self) -> dict[str, any]:
+        """ Returns the Object Class in JSON format.
+
+        Returns:
+            dict[str, float]: A dictionary containing the price.
+        """
+        return vars(self)
 
     @abstractmethod
     def to_array(self) -> numpy.array:
+        """ Returns the object in Array format.
+
+        Returns:
+            dict[str, any]: A dictionary containing the object.
+        """
         pass
 
     def __repr__(self):

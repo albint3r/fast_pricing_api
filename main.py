@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+
+from domain.i_listings_model import IListingsModel
 from domain.predict_price_facade import PredictPriceFacade
 from infrastructure.models.apartment import Apartment
 from infrastructure.models.house import House
@@ -9,47 +11,27 @@ app = FastAPI()
 
 
 @app.get('/house/')
-async def index(m2_land: float, m2_const: float, rooms: int, baths: int, cars: int, lat: float, long: float):
-    """
-    Endpoint that predicts the price of a house based on its features.
+async def get_house_predicted_price(house: IListingsModel = Depends(House)):
+    """ Predicts the price of a house based on its features.
 
     Parameters:
-        m2_land (float): Total square meters of the land.
-        m2_const (float): Total square meters of the house.
-        rooms (int): Number of rooms.
-        baths (int): Number of bathrooms.
-        cars (int): Number of parking spots.
-        lat (float): Latitude of the house.
-        long (float): Longitude of the house.
+    - house: an instance of a class implementing IListingsModel with the features of the house to predict its price.
 
     Returns:
-        float: The predicted price of the house.
-    """
-    house = House(m2_land=m2_land, m2_const=m2_const, rooms=rooms, baths=baths, cars=cars, lat=lat, long=long)
-    house_price_predictor = HousePricePredictor()
-    facade = PredictPriceFacade(listing_model=house, trained_model=house_price_predictor)
-
+    A dictionary with the predicted price and the input features used for the prediction."""
+    facade = PredictPriceFacade(listing_model=house, trained_model=HousePricePredictor())
     return facade.predict()
 
 
-@app.get('/apartments/')
-async def index(m2_const: float, rooms: int, baths: int, cars: int, lat: float, long: float):
-    """
-    Endpoint that predicts the price of an apartment based on its features.
+@app.get('/apartment/')
+async def get_apartment_predicted_price(apartment: IListingsModel = Depends(Apartment)):
+    """ Predicts the price of an apartment based on its features.
 
     Parameters:
-        m2_const (float): Total square meters of the apartment.
-        rooms (int): Number of rooms.
-        baths (int): Number of bathrooms.
-        cars (int): Number of parking spots.
-        lat (float): Latitude of the apartment.
-        long (float): Longitude of the apartment.
+    - apartment: an instance of a class implementing IListingsModel with
+     the features of the apartment to predict its price.
 
     Returns:
-        float: The predicted price of the apartment.
-    """
-    apartment = Apartment(m2_const=m2_const, rooms=rooms, baths=baths, cars=cars, lat=lat, long=long)
-    apartment_price_predictor = ApartmentPricePredictor()
-    facade = PredictPriceFacade(listing_model=apartment, trained_model=apartment_price_predictor)
-
+    A dictionary with the predicted price and the input features used for the prediction. """
+    facade = PredictPriceFacade(listing_model=apartment, trained_model=ApartmentPricePredictor())
     return facade.predict()

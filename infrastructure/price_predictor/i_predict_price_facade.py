@@ -1,8 +1,8 @@
 import numpy as np
 from abc import ABC, abstractmethod
 
-from domain.i_listings_model import IListingsModel
-from domain.i_trained_models import ITrainedModels
+from domain.price_predictor.i_listings_model import IListingsModel
+from domain.price_predictor.i_trained_models import ITrainedModels
 
 
 class IPredictPriceFacade(ABC):

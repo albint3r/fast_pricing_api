@@ -1,4 +1,5 @@
 # PredictPrice API
+### v1.0.0
 This is a simple API for predicting the price of a house or an apartment based on its features.
 
 # Getting Started
@@ -20,9 +21,9 @@ The available parameters are:
 - lat: the latitude of the listing
 - long: the longitude of the listing
 
-For example, to predict the price of a 3-bedroom, 2-bathroom house with 2 parking spaces located at (40.7128, -74.0060), you would send the following GET request:
+For example, to predict the price of a 3-bedroom, 2-bathroom house with 2 parking spaces located at (20.455478, -103.488211), you would send the following GET request:
 ```
-GET /house/?m2_const=2500&rooms=3&baths=2&cars=2&lat=40.7128&long=-74.0060
+GET /house/?m2_const=2500&rooms=3&baths=2&cars=2&lat=20.455478&long=-103.488211
 ```
 
 # Response Format

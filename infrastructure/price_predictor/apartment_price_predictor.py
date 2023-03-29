@@ -1,7 +1,7 @@
 import joblib
 import numpy
 
-from domain.i_trained_models import ITrainedModels
+from domain.price_predictor.i_trained_models import ITrainedModels
 
 
 class ApartmentPricePredictor(ITrainedModels):

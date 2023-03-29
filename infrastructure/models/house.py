@@ -1,6 +1,6 @@
 import numpy as np
 
-from domain.i_listings_model import IListingsModel
+from domain.price_predictor.i_listings_model import IListingsModel
 
 
 class House(IListingsModel):

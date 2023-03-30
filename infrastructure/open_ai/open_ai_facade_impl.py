@@ -1,7 +1,7 @@
 import openai
 from config import APIConfiguration
-from infrastructure.open_ai.i_open_ai_facade import IOPENAIFacade
-from infrastructure.models.text_completion import TextCompletion
+from domain.open_ai.i_open_ai_facade import IOPENAIFacade
+from domain.models.text_completion import TextCompletion
 
 
 class OPENAIFacadeImpl(IOPENAIFacade):

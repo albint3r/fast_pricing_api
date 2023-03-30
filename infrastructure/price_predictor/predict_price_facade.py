@@ -1,4 +1,4 @@
-from infrastructure.price_predictor.i_predict_price_facade import IPredictPriceFacade
+from domain.price_predictor.i_predict_price_facade import IPredictPriceFacade
 
 
 class PredictPriceFacade(IPredictPriceFacade):

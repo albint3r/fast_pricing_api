@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from infrastructure.models.text_completion import TextCompletion
+from domain.models.text_completion import TextCompletion
 
 
 class IOPENAIFacade(ABC):

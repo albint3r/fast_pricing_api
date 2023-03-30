@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Depends
 
 from config import APIConfiguration
-from domain.open_ai.open_ai_facade_impl import OPENAIFacadeImpl
+from infrastructure.open_ai.open_ai_facade_impl import OPENAIFacadeImpl
 from domain.price_predictor.i_listings_model import IListingsModel
-from domain.price_predictor.predict_price_facade import PredictPriceFacade
-from infrastructure.models.apartment import Apartment
-from infrastructure.models.house import House
+from infrastructure.price_predictor.predict_price_facade import PredictPriceFacade
+from domain.models.apartment import Apartment
+from domain.models.house import House
 from infrastructure.price_predictor.apartment_price_predictor import ApartmentPricePredictor
 from infrastructure.price_predictor.house_price_predictor import HousePricePredictor
 

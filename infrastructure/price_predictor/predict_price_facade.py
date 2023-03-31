@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import numpy as np
 
+from domain.models.img_response import ImgResponse
 from domain.price_predictor.i_listings_model import IListingsModel
 from domain.price_predictor.i_predict_price_facade import IPredictPriceFacade
 from domain.price_predictor.i_trained_models import ITrainedModels
@@ -11,13 +12,15 @@ class PredictPriceFacade(IPredictPriceFacade):
     """ Facade that predicts the price of a given listing model using a trained model."""
     trained_model: ITrainedModels
     listing_model: IListingsModel
+    img_response: ImgResponse
     predicted_price: np.array = None
 
-    def predict(self) -> dict[str, float]:
+    def predict(self) -> IListingsModel:
         listing_array = self.listing_model.to_array()
         # Load pickle File with the trained ML Model
         self.trained_model.load()
         # Predict Value of the listing request
         self.predicted_price = self.trained_model.predict(listing_array)
         self.listing_model.price = self.predicted_price[0]
-        return self.listing_model.to_json()
+        self.listing_model.img_url = self.img_response.url
+        return self.listing_model

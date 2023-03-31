@@ -26,6 +26,7 @@ class IListingsModel(ABC):
         self.cars = cars
         self.lat = lat
         self.long = long
+        self.img_url: str | None = None
 
     @abstractmethod
     def to_json(self) -> dict[str, any]:

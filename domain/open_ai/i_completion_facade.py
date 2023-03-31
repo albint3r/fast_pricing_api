@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from domain.models.text_completion import TextCompletion
 
 
-class IOPENAIFacade(ABC):
+class ICompletionFacade(ABC):
     """
     Interface for a service that provides a way to generate text completions
     using the OpenAI GPT-3 API.

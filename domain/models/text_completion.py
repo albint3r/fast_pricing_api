@@ -1,4 +1,10 @@
-class TextCompletion:
+from dataclasses import dataclass, field
+
+from domain.models._json_serialize import JsonSerialize
+
+
+@dataclass
+class TextCompletion(JsonSerialize):
     """
         Represents a response from the OpenAI text completion API.
 
@@ -17,27 +23,12 @@ class TextCompletion:
             result() -> Dict[str, str] or None: Returns the completed text from the API response as a dictionary with
             a single 'text' key, or None if no text was provided.
     """
-    def __init__(self, *, choices, created, id, model, object, usage):
-        self._id = id
-        self.choices = choices
-        self.created = created
-        self.model = model
-        self._object = object
-        self.usage = usage
-
-    @classmethod
-    def from_json(cls, json: dict):
-        """
-        Creates a new instance of the TextCompletion class from a JSON response returned by the OpenAI API.
-
-        Parameters:
-        json (dict): A JSON response returned by the OpenAI API.
-
-        Returns:
-        TextCompletion: A new instance of the TextCompletion class.
-        """
-        text_completion: TextCompletion = cls(**json)
-        return text_completion
+    choices: list[dict[str, any]]
+    created: int
+    id: str
+    model: str
+    usage: dict
+    object: str
 
     @property
     def result_text(self) -> str | None:

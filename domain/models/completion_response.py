@@ -4,7 +4,7 @@ from domain.models._json_serialize import JsonSerialize
 
 
 @dataclass
-class TextCompletion(JsonSerialize):
+class CompletionResponse(JsonSerialize):
     """
         Represents a response from the OpenAI text completion API.
 

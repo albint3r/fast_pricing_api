@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from domain.models.text_completion import TextCompletion
+from domain.models.completion_response import CompletionResponse
 
 
 class ICompletionFacade(ABC):
@@ -9,7 +9,7 @@ class ICompletionFacade(ABC):
     using the OpenAI GPT-3 API.
     """
     @abstractmethod
-    def create(self, prompt: str) -> TextCompletion:
+    def create(self, prompt: str) -> CompletionResponse:
         """
         Generate a text completion using the OpenAI GPT-3 API.
 
@@ -17,6 +17,6 @@ class ICompletionFacade(ABC):
             prompt (str): The prompt to generate a completion for.
 
         Returns:
-            TextCompletion: A `TextCompletion` object representing the generated text completion.
+            CompletionResponse: A `TextCompletion` object representing the generated text completion.
         """
         pass
